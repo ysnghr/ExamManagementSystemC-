@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ExamManagementSystemModelStoreContainer" CdmEntityContainer="ExamManagementSystemEntities">
+    <EntitySetMapping Name="Exams">
+      <EntityTypeMapping TypeName="ExamManagementSystemModel.Exam">
+        <MappingFragment StoreEntitySet="Exams">
+          <ScalarProperty Name="ExamId" ColumnName="ExamId" />
+          <ScalarProperty Name="ExamName" ColumnName="ExamName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExamsToQuestions">
+      <EntityTypeMapping TypeName="ExamManagementSystemModel.ExamsToQuestion">
+        <MappingFragment StoreEntitySet="ExamsToQuestions">
+          <ScalarProperty Name="ExamsToQuestionId" ColumnName="ExamsToQuestionId" />
+          <ScalarProperty Name="ExamId" ColumnName="ExamId" />
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Questions">
+      <EntityTypeMapping TypeName="ExamManagementSystemModel.Question">
+        <MappingFragment StoreEntitySet="Questions">
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+          <ScalarProperty Name="QuestionTitle" ColumnName="QuestionTitle" />
+          <ScalarProperty Name="QuestionTypeId" ColumnName="QuestionTypeId" />
+          <ScalarProperty Name="CorrectAnswer" ColumnName="CorrectAnswer" />
+          <ScalarProperty Name="Answer1" ColumnName="Answer1" />
+          <ScalarProperty Name="Answer2" ColumnName="Answer2" />
+          <ScalarProperty Name="Answer3" ColumnName="Answer3" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuestionTypes">
+      <EntityTypeMapping TypeName="ExamManagementSystemModel.QuestionType">
+        <MappingFragment StoreEntitySet="QuestionTypes">
+          <ScalarProperty Name="QuestionTypeId" ColumnName="QuestionTypeId" />
+          <ScalarProperty Name="QuestionTypeName" ColumnName="QuestionTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="ExamManagementSystemModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="UserFullName" ColumnName="UserFullName" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsersExams">
+      <EntityTypeMapping TypeName="ExamManagementSystemModel.UsersExam">
+        <MappingFragment StoreEntitySet="UsersExam">
+          <ScalarProperty Name="UsersExamId" ColumnName="UsersExamId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ExamId" ColumnName="ExamId" />
+          <ScalarProperty Name="QuizPoint" ColumnName="QuizPoint" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsersLogs">
+      <EntityTypeMapping TypeName="ExamManagementSystemModel.UsersLog">
+        <MappingFragment StoreEntitySet="UsersLog">
+          <ScalarProperty Name="LogId" ColumnName="LogId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTypes">
+      <EntityTypeMapping TypeName="ExamManagementSystemModel.UserType">
+        <MappingFragment StoreEntitySet="UserTypes">
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+          <ScalarProperty Name="UserTypeName" ColumnName="UserTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

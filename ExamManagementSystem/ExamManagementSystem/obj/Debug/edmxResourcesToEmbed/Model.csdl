@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ExamManagementSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Exam">
+    <Key>
+      <PropertyRef Name="ExamId" />
+    </Key>
+    <Property Name="ExamId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExamName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ExamsToQuestions" Relationship="Self.FK__ExamsToQu__ExamI__45F365D3" FromRole="Exams" ToRole="ExamsToQuestions" />
+    <NavigationProperty Name="UsersExams" Relationship="Self.FK__UsersExam__ExamI__34C8D9D1" FromRole="Exams" ToRole="UsersExam" />
+  </EntityType>
+  <EntityType Name="ExamsToQuestion">
+    <Key>
+      <PropertyRef Name="ExamsToQuestionId" />
+    </Key>
+    <Property Name="ExamsToQuestionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExamId" Type="Int32" Nullable="false" />
+    <Property Name="QuestionId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Exam" Relationship="Self.FK__ExamsToQu__ExamI__45F365D3" FromRole="ExamsToQuestions" ToRole="Exams" />
+    <NavigationProperty Name="Question" Relationship="Self.FK__ExamsToQu__Quest__44FF419A" FromRole="ExamsToQuestions" ToRole="Questions" />
+  </EntityType>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="QuestionId" />
+    </Key>
+    <Property Name="QuestionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuestionTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="QuestionTypeId" Type="Int32" Nullable="false" />
+    <Property Name="CorrectAnswer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Answer1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Answer2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Answer3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ExamsToQuestions" Relationship="Self.FK__ExamsToQu__Quest__44FF419A" FromRole="Questions" ToRole="ExamsToQuestions" />
+    <NavigationProperty Name="QuestionType" Relationship="Self.FK__Questions__Quest__36B12243" FromRole="Questions" ToRole="QuestionTypes" />
+  </EntityType>
+  <EntityType Name="QuestionType">
+    <Key>
+      <PropertyRef Name="QuestionTypeId" />
+    </Key>
+    <Property Name="QuestionTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuestionTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Questions" Relationship="Self.FK__Questions__Quest__36B12243" FromRole="QuestionTypes" ToRole="Questions" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserFullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="UserType" Relationship="Self.FK__Users__UserTypeI__31EC6D26" FromRole="Users" ToRole="UserTypes" />
+    <NavigationProperty Name="UsersExams" Relationship="Self.FK__UsersExam__UserI__33D4B598" FromRole="Users" ToRole="UsersExam" />
+    <NavigationProperty Name="UsersLogs" Relationship="Self.FK__UsersLog__UserId__32E0915F" FromRole="Users" ToRole="UsersLog" />
+  </EntityType>
+  <EntityType Name="UsersExam">
+    <Key>
+      <PropertyRef Name="UsersExamId" />
+    </Key>
+    <Property Name="UsersExamId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="ExamId" Type="Int32" Nullable="false" />
+    <Property Name="QuizPoint" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Exam" Relationship="Self.FK__UsersExam__ExamI__34C8D9D1" FromRole="UsersExam" ToRole="Exams" />
+    <NavigationProperty Name="User" Relationship="Self.FK__UsersExam__UserI__33D4B598" FromRole="UsersExam" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="UsersLog">
+    <Key>
+      <PropertyRef Name="LogId" />
+    </Key>
+    <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="BeginDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="User" Relationship="Self.FK__UsersLog__UserId__32E0915F" FromRole="UsersLog" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="UserType">
+    <Key>
+      <PropertyRef Name="UserTypeId" />
+    </Key>
+    <Property Name="UserTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__Users__UserTypeI__31EC6D26" FromRole="UserTypes" ToRole="Users" />
+  </EntityType>
+  <Association Name="FK__ExamsToQu__ExamI__45F365D3">
+    <End Role="Exams" Type="Self.Exam" Multiplicity="1" />
+    <End Role="ExamsToQuestions" Type="Self.ExamsToQuestion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Exams">
+        <PropertyRef Name="ExamId" />
+      </Principal>
+      <Dependent Role="ExamsToQuestions">
+        <PropertyRef Name="ExamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UsersExam__ExamI__34C8D9D1">
+    <End Role="Exams" Type="Self.Exam" Multiplicity="1" />
+    <End Role="UsersExam" Type="Self.UsersExam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Exams">
+        <PropertyRef Name="ExamId" />
+      </Principal>
+      <Dependent Role="UsersExam">
+        <PropertyRef Name="ExamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ExamsToQu__Quest__44FF419A">
+    <End Role="Questions" Type="Self.Question" Multiplicity="1" />
+    <End Role="ExamsToQuestions" Type="Self.ExamsToQuestion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questions">
+        <PropertyRef Name="QuestionId" />
+      </Principal>
+      <Dependent Role="ExamsToQuestions">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Questions__Quest__36B12243">
+    <End Role="QuestionTypes" Type="Self.QuestionType" Multiplicity="1" />
+    <End Role="Questions" Type="Self.Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuestionTypes">
+        <PropertyRef Name="QuestionTypeId" />
+      </Principal>
+      <Dependent Role="Questions">
+        <PropertyRef Name="QuestionTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Users__UserTypeI__31EC6D26">
+    <End Role="UserTypes" Type="Self.UserType" Multiplicity="1" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTypes">
+        <PropertyRef Name="UserTypeId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="UserTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UsersExam__UserI__33D4B598">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="UsersExam" Type="Self.UsersExam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UsersExam">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UsersLog__UserId__32E0915F">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="UsersLog" Type="Self.UsersLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UsersLog">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ExamManagementSystemEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Exams" EntityType="Self.Exam" />
+    <EntitySet Name="ExamsToQuestions" EntityType="Self.ExamsToQuestion" />
+    <EntitySet Name="Questions" EntityType="Self.Question" />
+    <EntitySet Name="QuestionTypes" EntityType="Self.QuestionType" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UsersExams" EntityType="Self.UsersExam" />
+    <EntitySet Name="UsersLogs" EntityType="Self.UsersLog" />
+    <EntitySet Name="UserTypes" EntityType="Self.UserType" />
+    <AssociationSet Name="FK__ExamsToQu__ExamI__45F365D3" Association="Self.FK__ExamsToQu__ExamI__45F365D3">
+      <End Role="Exams" EntitySet="Exams" />
+      <End Role="ExamsToQuestions" EntitySet="ExamsToQuestions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UsersExam__ExamI__34C8D9D1" Association="Self.FK__UsersExam__ExamI__34C8D9D1">
+      <End Role="Exams" EntitySet="Exams" />
+      <End Role="UsersExam" EntitySet="UsersExams" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ExamsToQu__Quest__44FF419A" Association="Self.FK__ExamsToQu__Quest__44FF419A">
+      <End Role="Questions" EntitySet="Questions" />
+      <End Role="ExamsToQuestions" EntitySet="ExamsToQuestions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Questions__Quest__36B12243" Association="Self.FK__Questions__Quest__36B12243">
+      <End Role="QuestionTypes" EntitySet="QuestionTypes" />
+      <End Role="Questions" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Users__UserTypeI__31EC6D26" Association="Self.FK__Users__UserTypeI__31EC6D26">
+      <End Role="UserTypes" EntitySet="UserTypes" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UsersExam__UserI__33D4B598" Association="Self.FK__UsersExam__UserI__33D4B598">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersExam" EntitySet="UsersExams" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UsersLog__UserId__32E0915F" Association="Self.FK__UsersLog__UserId__32E0915F">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersLog" EntitySet="UsersLogs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
